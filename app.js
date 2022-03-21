@@ -72,4 +72,29 @@ const newsService = (function() {
 //  init selects
 document.addEventListener('DOMContentLoaded', function() {
     M.AutoInit();
+    loadNews();
 });
+
+//Load news function
+function loadNews() {
+    newsService.topHeadlines('us', onGetResponse)
+}
+
+//Function on get response from server
+function onGetResponse(err, res) {
+    renderNews(res.articles)
+}
+
+//Function render news
+function renderNews(news) {
+    const newsContainer = document.querySelector('.news-container .row');
+    news.forEach(newsItem => {
+        const el = newsTemplate(newsItem);
+    })
+    console.log(newsContainer);
+}
+
+//News item template function
+function newsTemplate(news) {
+    console.log(news);
+}
