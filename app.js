@@ -54,7 +54,7 @@ function customHttp() {
     };
 }
 
-//Elements 
+//Elements
 
 const form = document.forms['newsControls'];
 const countrySelect = form.elements['country'];
@@ -92,6 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //Load news function
 function loadNews() {
+    showPreloader();
 
     const country = countrySelect.value;
     const searchText = searchInput.value;
@@ -102,6 +103,7 @@ function loadNews() {
 
 //Function on get response from server
 function onGetResponse(err, res) {
+    removePreloader();
     if (err) {
         showAlert(err, 'error-msg');
         return;
@@ -130,7 +132,7 @@ function renderNews(news) {
 }
 
 //Function clear container
-function clearContainer() {
+function clearContainer(container) {
     let child = container.lastElementChild;
     while (child) {
         container.removeChild(child);
@@ -164,4 +166,21 @@ function showAlert(msg, type = "sucess") {
         html: msg,
         classes: type
     })
+}
+
+//Show preLoader
+function showPreloader() {
+    document.body.insertAdjacentHTML('afterbegin',
+        `<div class="progress">
+            <div class="indeterminate"></div>
+            </div>`
+    )
+}
+
+//Remove preLoader function
+function removePreloader() {
+    const loader = document.querySelector('.progress');
+    if (loader) {
+        loader.remove();
+    }
 }
