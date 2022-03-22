@@ -11,6 +11,7 @@ function customHttp() {
                         return;
                     }
                     const response = JSON.parse(xhr.responseText);
+                    console.log(response.articles)
                     cb(null, response);
                 });
 
@@ -58,7 +59,9 @@ function customHttp() {
 
 const form = document.forms['newsControls'];
 const countrySelect = form.elements['country'];
+const categorySelect = form.elements['category'];
 const searchInput = form.elements['search'];
+
 
 //Events
 form.addEventListener('submit', (e) => {
@@ -74,8 +77,8 @@ const newsService = (function() {
     const apiUrl = 'https://news-api-v2.herokuapp.com';
 
     return {
-        topHeadlines(country = 'ru', cb) {
-            http.get(`${apiUrl}/top-headlines?country=${country}&apiKey=${apiKey}`, cb)
+        topHeadlines(country = 'us', category = 'general', cb) {
+            http.get(`${apiUrl}/top-headlines?country=${country}&category=${category}&apiKey=${apiKey}`, cb)
         },
         everything(query, cb) {
             console.log(query)
@@ -95,9 +98,11 @@ function loadNews() {
     showPreloader();
 
     const country = countrySelect.value;
+    const category = categorySelect.value
     const searchText = searchInput.value;
+    // const category;
     if (!searchText) {
-        newsService.topHeadlines(country, onGetResponse)
+        newsService.topHeadlines(country, category, onGetResponse);
     } else newsService.everything(searchText, onGetResponse)
 }
 
@@ -110,6 +115,7 @@ function onGetResponse(err, res) {
     }
     if (!res.articles.length) {
         //Show empty msg
+        alert("Now news!!!")
         return;
     }
 

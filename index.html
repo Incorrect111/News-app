@@ -25,13 +25,23 @@
                         <form name="newsControls">
                             <div class="card-content">
                                 <span class="card-title">Search news</span>
+                                <!-- Choose country -->
                                 <div class="input-field">
                                     <select name="country" id="country">
-                                      <option value="us">United states</option>
-                                        <option value="ua">Ukraine</option>
-                                        <option value="de">Germany</option>
-                  </select>
+                                        <option value="us">United states</option>
+                                        <option value="ca">Canada</option>
+                                        <option value="ie">Ireland</option>
+                                    </select>
                                     <label>Choose your country</label>
+                                </div>
+                                <!-- Choose category -->
+                                <div class="input-field">
+                                    <select name="category" id="category">
+                                        <option value="general">General</option>
+                                        <option value="health">Health</option>
+                                        <option value="technology">Technology</option>
+                                    </select>
+                                    <label>Choose category</label>
                                 </div>
                                 <div class="input-field">
                                     <input type="text" id="autocomplete-input" class="autocomplete" name="search">
@@ -40,8 +50,8 @@
                             </div>
                             <div class="card-action">
                                 <button class="btn waves-effect waves-light" type="submit" name="action">Search
-                  <i class="material-icons rigt">search</i>
-                </button>
+                                    <i class="material-icons rigt">search</i>
+                                </button>
                             </div>
                         </form>
                     </div>
