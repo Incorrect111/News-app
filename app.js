@@ -92,6 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //Load news function
 function loadNews() {
+
     const country = countrySelect.value;
     const searchText = searchInput.value;
     if (!searchText) {
@@ -101,13 +102,24 @@ function loadNews() {
 
 //Function on get response from server
 function onGetResponse(err, res) {
+    if (err) {
+        showAlert(err, 'error-msg');
+        return;
+    }
+    if (!res.articles.length) {
+        //Show empty msg
+        return;
+    }
 
-    renderNews(res.articles)
+    renderNews(res.articles);
 }
 
 //Function render news
 function renderNews(news) {
     const newsContainer = document.querySelector('.news-container .row');
+    if (newsContainer.children.length) {
+        clearContainer(newsContainer);
+    }
     let fragment = '';
     news.forEach(newsItem => {
         const el = newsTemplate(newsItem);
@@ -115,6 +127,15 @@ function renderNews(news) {
     })
 
     newsContainer.insertAdjacentHTML('afterbegin', fragment);
+}
+
+//Function clear container
+function clearContainer() {
+    let child = container.lastElementChild;
+    while (child) {
+        container.removeChild(child);
+        child = container.lastElementChild;
+    }
 }
 
 //News item template function
@@ -135,4 +156,12 @@ function newsTemplate({ urlToImage, title, url, description }) {;
       </div>
     </div>
     `;
+}
+
+function showAlert(msg, type = "sucess") {
+    console.log(type)
+    M.toast({
+        html: msg,
+        classes: type
+    })
 }
