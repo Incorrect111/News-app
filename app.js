@@ -154,8 +154,8 @@ function imgNotAvaible() {
 //News item template function
 function newsTemplate({ urlToImage, title, url, description }) {
 
-
-    // if (!urlToImage) urlToImage = imgNotAvaible;
+    console.log(imgNotAvaible.src)
+        // if (!urlToImage) urlToImage = imgNotAvaible;
 
     return `
     <div class="col s12">
