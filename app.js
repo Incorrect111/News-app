@@ -114,8 +114,7 @@ function onGetResponse(err, res) {
         return;
     }
     if (!res.articles.length) {
-        //Show empty msg
-        alert("Now news!!!")
+        showAlert('Now news!!!', 'rounded')
         return;
     }
 
@@ -146,13 +145,23 @@ function clearContainer(container) {
     }
 }
 
+function imgNotAvaible() {
+    const imgNotAvaible = document.createElement('img');
+    imgNotAvaible.src = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg";
+    return imgNotAvaible;
+}
+
 //News item template function
-function newsTemplate({ urlToImage, title, url, description }) {;
+function newsTemplate({ urlToImage, title, url, description }) {
+
+
+    // if (!urlToImage) urlToImage = imgNotAvaible;
+
     return `
     <div class="col s12">
       <div class="card">
         <div class="card-image">
-          <img src="${urlToImage}">
+          <img src="${urlToImage}" onerror="${imgNotAvaible()}">
           <span class="card-title">${title || ""}</span>
         </div>
         <div class="card-content">
@@ -164,6 +173,10 @@ function newsTemplate({ urlToImage, title, url, description }) {;
       </div>
     </div>
     `;
+}
+
+function showEmptMsg() {
+
 }
 
 function showAlert(msg, type = "sucess") {
