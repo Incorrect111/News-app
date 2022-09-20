@@ -72,7 +72,7 @@ form.addEventListener('submit', (e) => {
 
 // Init http module
 const http = customHttp();
-const newsService = (function() {
+const newsService = (function () {
     const apiKey = 'd4bae103f09e4b9780253a2738e6572f';
     const apiUrl = 'https://news-api-v2.herokuapp.com';
 
@@ -88,7 +88,7 @@ const newsService = (function() {
 })()
 
 //  init selects
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     M.AutoInit();
     loadNews();
 });
@@ -152,25 +152,30 @@ function imgNotAvaible() {
 }
 
 //News item template function
-function newsTemplate({ urlToImage, title, url, description }) {
+function newsTemplate({
+    urlToImage,
+    title,
+    url,
+    description
+}) {
 
     console.log(imgNotAvaible.src)
-        // if (!urlToImage) urlToImage = imgNotAvaible;
+    // if (!urlToImage) urlToImage = imgNotAvaible;
 
     return `
     <div class="col s12">
-      <div class="card">
-        <div class="card-image">
-          <img src="${urlToImage}" onerror="${imgNotAvaible()}">
-          <span class="card-title">${title || ""}</span>
+        <div class="card">
+            <div class="card-image">
+                <img src="${urlToImage}" onerror="${imgNotAvaible()}">
+                <span class="card-title">${title || ""}</span>
+            </div>
+            <div class="card-content">
+                <p>${description || ""}</p>
+            </div>
+            <div class="card-action">
+                <a href="${url}">Read more</a>
+            </div>
         </div>
-        <div class="card-content">
-          <p>${description || ""}</p>
-        </div>
-        <div class="card-action">
-          <a href="${url}">Read more</a>
-        </div>
-      </div>
     </div>
     `;
 }
